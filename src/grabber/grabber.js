@@ -46,6 +46,8 @@ const saveData = (data) => {
 }
 
 (async () => {
+  fs.unlink('src/data.json', () => {});
+
   const browser = await puppeteer.launch({
     devtools: true,
   });
