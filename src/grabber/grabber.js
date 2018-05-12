@@ -57,7 +57,7 @@ const saveData = data => {
   fs.unlink("src/data.json", () => {});
 
   const browser = await puppeteer.launch({
-    devtools: true
+    devtools: false
   });
   const page = await browser.newPage();
   await page.goto(BASE_URL);
@@ -86,7 +86,7 @@ const grab = async (page, browser, date, retry) => {
   try {
     await page.goto(BASE_URL);
 
-    console.log(blue("clicks"));
+    console.log(blue("Opened base page"));
     await page.click(selectors.mainFrom);
     await page.click(selectors.mainTo);
     const inputDate = await page.$(selectors.mainDateInput);
@@ -97,8 +97,7 @@ const grab = async (page, browser, date, retry) => {
 
     await page.screenshot({ path: "screenshots/main-presubmit.png" });
 
-    // const navigationToTicketList = page.waitForNavigation();
-    console.log(blue("click selector"));
+    console.log(blue("field inputs"));
     await page.click(selectors.mainSubmit);
     await page.waitForSelector(selectors.ticketsList);
 
