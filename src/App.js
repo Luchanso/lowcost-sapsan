@@ -1,46 +1,60 @@
-import React, { Component } from 'react';
-import data from './data';
+import React, { Component } from "react";
+import data from "./data";
 
 const isSapsan = train => train.brandId === 1;
-const getCheaperCar = train => train.seatCars.reduce((car, cheaperCar) => {
-  if (Number(car.tariff) < Number(cheaperCar.tariff)) {
-    return car;
-  }
+const isNotForDisabled = car => !car.disabledPerson;
+const removeDisabled = train => {
+  const result = {
+    ...train,
+    seatCars: train.seatCars.filter(isNotForDisabled)
+  };
 
-  return cheaperCar;
-}, train.seatCars[0]);
+  return result;
+};
+const getCheaperCar = cars =>
+  cars.reduce((car, cheaperCar) => {
+    if (Number(car.tariff) < Number(cheaperCar.tariff)) {
+      return car;
+    }
+
+    return cheaperCar;
+  }, cars[0]);
 
 const cheapSort = (trainA, trainB) => {
-  const carA = getCheaperCar(trainA);
-  const carB = getCheaperCar(trainB);
+  const carA = getCheaperCar(trainA.seatCars);
+  const carB = getCheaperCar(trainB.seatCars);
 
   if (Number(carA.tariff) < Number(carB.tariff)) {
     return -1;
   } else {
     return 1;
   }
-}
+};
 
-const prepare = (train) => {
-  const car = getCheaperCar(train);
-  const rowDate = train.trDate0.split('.');
-  const rowTime = train.trTime0.split(':');
-  const date = new Date(rowDate[2], rowDate[1] - 1, rowDate[0], rowTime[0], rowTime[1]);
+const prepare = train => {
+  const car = getCheaperCar(train.seatCars);
+  const rowDate = train.trDate0.split(".");
+  const rowTime = train.trTime0.split(":");
+  const date = new Date(
+    rowDate[2],
+    rowDate[1] - 1,
+    rowDate[0],
+    rowTime[0],
+    rowTime[1]
+  );
 
-  return `${date.toLocaleString('ru')} ${train.number} ${car.tariff}\n`;
-}
+  return `${date.toLocaleString("ru")} ${train.number} ${car.tariff}\n`;
+};
 
 class App extends Component {
   render() {
-    const filtered = data.filter(isSapsan);
-    const sortered = filtered.sort(cheapSort);
-    const prepared = sortered.map(prepare);
+    const prepared = data
+      .filter(isSapsan)
+      .map(removeDisabled)
+      .sort(cheapSort)
+      .map(prepare);
 
-    return (
-      <pre style={{ margin: 25 }}>
-        { prepared }
-      </pre>
-    );
+    return <pre style={{ margin: 25 }}>{prepared}</pre>;
   }
 }
 
