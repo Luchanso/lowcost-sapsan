@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chalk": "^2.4.1",
     "dateformat": "^3.0.3",
     "puppeteer": "^1.4.0",
     "react": "^16.3.2",
