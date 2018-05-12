@@ -25,7 +25,7 @@ const prepare = (train) => {
   const car = getCheaperCar(train);
   const rowDate = train.trDate0.split('.');
   const rowTime = train.trTime0.split(':');
-  const date = new Date(rowDate[2], rowDate[1], rowDate[0], rowTime[0], rowTime[1]);
+  const date = new Date(rowDate[2], rowDate[1] - 1, rowDate[0], rowTime[0], rowTime[1]);
 
   return `${date.toLocaleString('ru')} ${train.number} ${car.tariff}\n`;
 }
