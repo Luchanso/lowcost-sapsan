@@ -1,5 +1,5 @@
 # Lowcost sapsan
-Service for search cheaper tickets on Sapsan train
+[Service](https://luchanso.github.io/lowcost-sapsan/) for search cheaper tickets on Sapsan train
 ![screenshot](screenshot.png)
 
 ## Install and run
