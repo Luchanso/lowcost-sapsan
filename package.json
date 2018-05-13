@@ -2,6 +2,7 @@
   "name": "lowcost-sapsan",
   "version": "0.2.0",
   "private": true,
+  "homepage" : "http://luchanso.github.io/lowcost-sapsan",
   "dependencies": {
     "@material-ui/icons": "^1.0.0-beta.43",
     "chalk": "^2.4.1",
