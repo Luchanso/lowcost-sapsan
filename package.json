@@ -1,11 +1,12 @@
 {
   "name": "lowcost-sapsan",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@material-ui/icons": "^1.0.0-beta.43",
     "chalk": "^2.4.1",
     "dateformat": "^3.0.3",
+    "gh-pages": "^1.1.0",
     "material-ui": "^1.0.0-beta.47",
     "puppeteer": "^1.4.0",
     "ramda": "^0.25.0",
@@ -15,6 +16,8 @@
     "react-virtualized": "^9.18.5"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "grab": "node ./src/grabber/index",
     "start": "react-scripts start",
     "build": "react-scripts build",
