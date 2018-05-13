@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import dateformat from 'dateformat';
 import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
 import CssBaseline from "material-ui/CssBaseline";
 import Typography from "material-ui/Typography";
@@ -54,8 +55,9 @@ const prepare = train => {
     rowTime[1]
   );
 
+
   return {
-    date: date.toLocaleString("ru"),
+    date: dateformat(date, 'dd.mm.yyyy, HH:MM'),
     train: train.number,
     price: car.tariff
   };
@@ -106,12 +108,14 @@ class App extends Component {
           <Typography variant="headline" gutterBottom>
             Билеты на Сапсан МСК - СПБ
           </Typography>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="caption" gutterBottom>
             Данные с{" "}
             <Link href="http://pass.rzd.ru" target="_blank">
               pass.rzd.ru
             </Link>{" "}
             от 12.06.2018
+            <br />
+            Указано московское время
           </Typography>
           <TicketList items={this.state.prepared} />
         </div>
