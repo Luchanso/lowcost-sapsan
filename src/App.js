@@ -9,6 +9,8 @@ import Link from "./components/Link";
 import data from "./data";
 import background from "./background.jpg";
 import License from "./components/License";
+import GithubLink from "./components/GithubLink";
+import FixedIcons from './components/FixedIcons';
 
 const isSapsan = train => train.brandId === 1;
 const isNotForDisabled = car => !car.disabledPerson;
@@ -90,11 +92,17 @@ class App extends Component {
   }
 
   render() {
+    const resultTheme = this.prepareTheme();
+    const { spacing } = resultTheme;
+
     return (
-      <MuiThemeProvider theme={this.prepareTheme()}>
+      <MuiThemeProvider theme={resultTheme}>
         <CssBaseline />
-        <ThemeSwitcher onClick={this.handleSwitchTheme} />
-        <div style={{ margin: 20, backgroundImage: background }}>
+        <FixedIcons>
+          <ThemeSwitcher onClick={this.handleSwitchTheme} />
+          <GithubLink href="https://github.com/Luchanso/lowcost-sapsan/" target="_blank" />
+        </FixedIcons>
+        <div style={{ margin: spacing.unit * 2, backgroundImage: background }}>
           <Typography variant="headline" gutterBottom>
             Билеты на Сапсан МСК - СПБ
           </Typography>

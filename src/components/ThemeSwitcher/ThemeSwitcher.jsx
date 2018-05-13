@@ -3,11 +3,8 @@ import IconButton from "material-ui/IconButton";
 import { withStyles } from "material-ui/styles";
 import InvertColorsIcon from "@material-ui/icons/InvertColors";
 
-const styles = ({ palette }) => ({
+const styles = ({ spacing, palette }) => ({
   root: {
-    position: "fixed",
-    top: 10,
-    right: 10,
     color: palette.type === "dark" ? "white" : "black"
   }
 });
