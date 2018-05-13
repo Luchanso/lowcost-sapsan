@@ -11,11 +11,11 @@ yarn grab # for fetching data. It will work ~400 sec.
 yarn start # for view parsed data
 ```
 
-## Color paletty
+## Color palette
 You can find colors value in [src/theme.js](https://github.com/Luchanso/lowcost-sapsan/blob/master/src/theme.js)
 
 
-![color-paletty](color-paletty.png)
+![color-palette](color-palette.png)
 
 ## Other licenses
 Steam locomotive icon (favicon.ico) by [Delapouite](http://delapouite.com/) under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)
