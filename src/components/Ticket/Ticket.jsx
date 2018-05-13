@@ -9,7 +9,7 @@ import { withStyles, withTheme } from "material-ui/styles";
 
 const styles = ({ palette }) => ({
   price: {
-    color: palette.secondary.main,
+    color: palette.secondary.main
   },
   root: {
     width: 300

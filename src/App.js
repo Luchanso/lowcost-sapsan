@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
-import CssBaseline from 'material-ui/CssBaseline';
+import CssBaseline from "material-ui/CssBaseline";
 import Typography from "material-ui/Typography";
 import theme from "./theme";
 import TicketList from "./components/TicketList";
-import ThemeSwitcher from './components/ThemeSwitcher';
+import ThemeSwitcher from "./components/ThemeSwitcher";
+import Link from "./components/Link";
 import data from "./data";
 import background from "./background.jpg";
 
@@ -59,8 +60,19 @@ const prepare = train => {
 
 class App extends Component {
   state = {
-    isDarkTheme: false
+    isDarkTheme: false,
+    prepared: []
   };
+
+  componentDidMount() {
+    const prepared = data
+      .filter(isSapsan)
+      .map(removeDisabled)
+      .sort(cheapSort)
+      .map(prepare);
+
+    this.setState({ prepared });
+  }
 
   prepareTheme() {
     const { isDarkTheme } = this.state;
@@ -69,20 +81,14 @@ class App extends Component {
       ...theme,
       palette: {
         ...theme.palette,
-        type: isDarkTheme ? 'dark' : 'light'
+        type: isDarkTheme ? "dark" : "light"
       }
-    }
+    };
 
     return createMuiTheme(result);
   }
 
   render() {
-    const prepared = data
-      .filter(isSapsan)
-      .map(removeDisabled)
-      .sort(cheapSort)
-      .map(prepare);
-
     return (
       <MuiThemeProvider theme={this.prepareTheme()}>
         <CssBaseline />
@@ -91,7 +97,10 @@ class App extends Component {
           <Typography variant="headline" gutterBottom>
             Билеты на Сапсан МСК - СПБ
           </Typography>
-          <TicketList items={prepared} />
+          <Typography variant="subheading" gutterBottom>
+            Данные с <Link href="http://pass.rzd.ru" rel="noopener" target="_blank" >pass.rzd.ru</Link> от 12.06.2018
+          </Typography>
+          <TicketList items={this.state.prepared} />
         </div>
       </MuiThemeProvider>
     );
@@ -101,7 +110,7 @@ class App extends Component {
     this.setState(({ isDarkTheme }) => ({
       isDarkTheme: !isDarkTheme
     }));
-  }
+  };
 }
 
 export default App;

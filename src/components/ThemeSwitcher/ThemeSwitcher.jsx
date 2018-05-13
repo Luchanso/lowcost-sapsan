@@ -6,8 +6,8 @@ import InvertColorsIcon from "@material-ui/icons/InvertColors";
 const styles = ({ palette }) => ({
   root: {
     position: "fixed",
-    top: 20,
-    right: 20,
+    top: 10,
+    right: 10,
     color: palette.type === "dark" ? "white" : "black"
   }
 });
