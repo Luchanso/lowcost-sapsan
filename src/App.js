@@ -1,5 +1,12 @@
 import React, { Component } from "react";
+import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
+import CssBaseline from 'material-ui/CssBaseline';
+import Typography from "material-ui/Typography";
+import theme from "./theme";
+import TicketList from "./components/TicketList";
+import ThemeSwitcher from './components/ThemeSwitcher';
 import data from "./data";
+import background from "./background.jpg";
 
 const isSapsan = train => train.brandId === 1;
 const isNotForDisabled = car => !car.disabledPerson;
@@ -43,10 +50,32 @@ const prepare = train => {
     rowTime[1]
   );
 
-  return `${date.toLocaleString("ru")} ${train.number} ${car.tariff}\n`;
+  return {
+    date: date.toLocaleString("ru"),
+    train: train.number,
+    price: car.tariff
+  };
 };
 
 class App extends Component {
+  state = {
+    isDarkTheme: false
+  };
+
+  prepareTheme() {
+    const { isDarkTheme } = this.state;
+
+    const result = {
+      ...theme,
+      palette: {
+        ...theme.palette,
+        type: isDarkTheme ? 'dark' : 'light'
+      }
+    }
+
+    return createMuiTheme(result);
+  }
+
   render() {
     const prepared = data
       .filter(isSapsan)
@@ -54,7 +83,24 @@ class App extends Component {
       .sort(cheapSort)
       .map(prepare);
 
-    return <pre style={{ margin: 25 }}>{prepared}</pre>;
+    return (
+      <MuiThemeProvider theme={this.prepareTheme()}>
+        <CssBaseline />
+        <ThemeSwitcher onClick={this.handleSwitchTheme} />
+        <div style={{ margin: 20, backgroundImage: background }}>
+          <Typography variant="headline" gutterBottom>
+            Билеты на Сапсан МСК - СПБ
+          </Typography>
+          <TicketList items={prepared} />
+        </div>
+      </MuiThemeProvider>
+    );
+  }
+
+  handleSwitchTheme = () => {
+    this.setState(({ isDarkTheme }) => ({
+      isDarkTheme: !isDarkTheme
+    }));
   }
 }
 
