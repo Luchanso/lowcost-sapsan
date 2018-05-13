@@ -1,5 +1,6 @@
 # Lowcost sapsan
 Service for search cheaper tickets on Sapsan train
+![screenshot](screenshot.png)
 
 ## Install and run
 ```sh
