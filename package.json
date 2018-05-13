@@ -1,6 +1,6 @@
 {
   "name": "lowcost-sapsan",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "private": true,
   "homepage" : "http://luchanso.github.io/lowcost-sapsan",
   "dependencies": {

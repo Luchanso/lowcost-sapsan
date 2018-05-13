@@ -5,7 +5,7 @@ import {
   ListItemSecondaryAction,
   ListItemText
 } from "material-ui/List";
-import { withStyles, withTheme } from "material-ui/styles";
+import { withStyles } from "material-ui/styles";
 
 const styles = ({ palette }) => ({
   price: {
