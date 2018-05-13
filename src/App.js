@@ -8,6 +8,7 @@ import ThemeSwitcher from "./components/ThemeSwitcher";
 import Link from "./components/Link";
 import data from "./data";
 import background from "./background.jpg";
+import License from "./components/License";
 
 const isSapsan = train => train.brandId === 1;
 const isNotForDisabled = car => !car.disabledPerson;
@@ -98,10 +99,15 @@ class App extends Component {
             Билеты на Сапсан МСК - СПБ
           </Typography>
           <Typography variant="subheading" gutterBottom>
-            Данные с <Link href="http://pass.rzd.ru" rel="noopener" target="_blank" >pass.rzd.ru</Link> от 12.06.2018
+            Данные с{" "}
+            <Link href="http://pass.rzd.ru" target="_blank">
+              pass.rzd.ru
+            </Link>{" "}
+            от 12.06.2018
           </Typography>
           <TicketList items={this.state.prepared} />
         </div>
+        <License />
       </MuiThemeProvider>
     );
   }
