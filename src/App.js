@@ -106,7 +106,7 @@ class App extends Component {
         </FixedIcons>
         <div style={{ margin: spacing.unit * 2, backgroundImage: background }}>
           <Typography variant="headline" gutterBottom>
-            Билеты на Сапсан МСК - СПБ
+            Билеты на Сапсан из МСК в СПБ
           </Typography>
           <Typography variant="caption" gutterBottom>
             Данные с{" "}
