@@ -2,8 +2,8 @@ let request = require("request-promise");
 const { blue } = require("chalk");
 const dateformat = require("dateformat");
 const fs = require("fs");
+const sleep = require("sleep-promise");
 
-// request.debug = true;
 var jar = request.jar();
 request = request.defaults({ jar });
 
@@ -13,7 +13,7 @@ const USER_AGENT =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36";
 
 const grab = async date => {
-  const formData = {
+  const form = {
     dir: 0,
     tfl: 3,
     code0: 2000000,
@@ -23,30 +23,17 @@ const grab = async date => {
   };
   const options = {
     uri: "https://pass.rzd.ru/timetable/public/ru?layer_id=5827",
-    formData,
+    form,
     transform: body => JSON.parse(body),
     jar
   };
 
   const { RID } = await request.post(options);
-  const result = await request.post({
-    ...options,
-    formData: {
-      ...formData,
-      rid: RID
-    }
-  });
+  options.form.rid = RID;
+  await sleep(1000);
+  const result = await request.post(options);
 
-
-  console.log({
-    ...options,
-    formData: {
-      ...formData,
-      rid: RID
-    }
-  });
   console.log(blue(JSON.stringify(result)));
-  // console.log(jar);
 };
 
 (async () => {
