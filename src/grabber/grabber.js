@@ -49,8 +49,12 @@ const grab = async date => {
     jar
   };
 
-  console.log(blue("fetching rid"));
-  const { RID } = await request.post(options);
+  let RID = null;
+  for (let i = 0; i < 10 || !RID; i++) {
+    console.log(blue(`fetching rid, try: ${i + 1}`));
+    let RID = (await request.post(options)).RID;
+  }
+
   options.form.rid = RID;
   await sleep(1500);
   console.log(blue("fetching data"));
