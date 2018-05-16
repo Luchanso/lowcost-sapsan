@@ -61,7 +61,7 @@ const grab = async date => {
 (async () => {
   await cleanData();
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 90; i++) {
     const date = new Date(Date.now() + ONE_DAY * i);
     console.log(blue("grab"), "for", date.toDateString());
     await grab(dateformat(date, "dd.mm.yyyy"));
