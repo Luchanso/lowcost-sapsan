@@ -84,10 +84,6 @@ class App extends Component {
 
   componentDidMount() {
     const prepared = prepareData(data);
-      // .filter(isSapsan)
-      // .map(removeDisabled)
-      // .sort(cheapSort)
-      // .map(prepareTrain);
 
     this.setState({ prepared });
   }
