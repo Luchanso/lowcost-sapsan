@@ -129,7 +129,7 @@ class App extends Component {
             <Link href="http://pass.rzd.ru" target="_blank">
               pass.rzd.ru
             </Link>{" "}
-            от 12.06.2018
+            от 16.06.2018
             <br />
             Указано московское время
           </Typography>
