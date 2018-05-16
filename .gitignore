@@ -23,3 +23,5 @@ yarn-error.log*
 # screenshots
 /screenshots
 /src/data.json
+
+/.vscode

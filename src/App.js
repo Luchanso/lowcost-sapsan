@@ -84,8 +84,12 @@ class App extends Component {
 
   componentDidMount() {
     const prepared = prepareData(data);
+    const isDarkTheme = Boolean(localStorage.getItem("isDarkTheme"));
 
-    this.setState({ prepared });
+    this.setState({
+      prepared,
+      isDarkTheme
+    });
   }
 
   prepareTheme() {
@@ -137,9 +141,12 @@ class App extends Component {
   }
 
   handleSwitchTheme = () => {
-    this.setState(({ isDarkTheme }) => ({
-      isDarkTheme: !isDarkTheme
-    }));
+    this.setState(({ isDarkTheme }) => {
+      localStorage.setItem('isDarkTheme', !isDarkTheme);
+      return {
+        isDarkTheme: !isDarkTheme
+      };
+    });
   };
 }
 
