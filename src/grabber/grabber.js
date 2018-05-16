@@ -50,9 +50,12 @@ const grab = async date => {
   };
 
   let RID = null;
-  for (let i = 0; i < 10 || !RID; i++) {
+  for (let i = 0; i < 10 && !RID; i++) {
     console.log(blue(`fetching rid, try: ${i + 1}`));
-    let RID = (await request.post(options)).RID;
+    const authResult = (await request.post(options));
+    if (authResult.RID) {
+      RID = authResult.RID;
+    }
   }
 
   options.form.rid = RID;
