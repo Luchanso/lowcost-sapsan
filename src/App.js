@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import dateformat from 'dateformat';
+import dateformat from "dateformat";
 import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
 import CssBaseline from "material-ui/CssBaseline";
 import Typography from "material-ui/Typography";
@@ -11,7 +11,7 @@ import data from "./data";
 import background from "./background.jpg";
 import License from "./components/License";
 import GithubLink from "./components/GithubLink";
-import FixedIcons from './components/FixedIcons';
+import FixedIcons from "./components/FixedIcons";
 
 const isSapsan = train => train.brandId === 1;
 const isNotForDisabled = car => !car.disabledPerson;
@@ -43,7 +43,7 @@ const cheapSort = (trainA, trainB) => {
   }
 };
 
-const prepare = train => {
+const prepareTrain = train => {
   const car = getCheaperCar(train.seatCars);
   const rowDate = train.trDate0.split(".");
   const rowTime = train.trTime0.split(":");
@@ -55,13 +55,26 @@ const prepare = train => {
     rowTime[1]
   );
 
-
   return {
-    date: dateformat(date, 'dd.mm.yyyy, HH:MM'),
+    ...train,
+    date: dateformat(date, "dd.mm.yyyy, HH:MM"),
     train: train.number,
     price: car.tariff
   };
 };
+
+const prepareData = data =>
+  data
+    .reduce((result, train) => {
+      if (!isSapsan(train)) {
+        return result;
+      }
+      const withoutDisabled = removeDisabled(train);
+      const prepared = prepareTrain(withoutDisabled);
+
+      return [...result, prepared];
+    }, [])
+    .sort(cheapSort);
 
 class App extends Component {
   state = {
@@ -70,11 +83,11 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const prepared = data
-      .filter(isSapsan)
-      .map(removeDisabled)
-      .sort(cheapSort)
-      .map(prepare);
+    const prepared = prepareData(data);
+      // .filter(isSapsan)
+      // .map(removeDisabled)
+      // .sort(cheapSort)
+      // .map(prepareTrain);
 
     this.setState({ prepared });
   }
@@ -102,7 +115,10 @@ class App extends Component {
         <CssBaseline />
         <FixedIcons>
           <ThemeSwitcher onClick={this.handleSwitchTheme} />
-          <GithubLink href="https://github.com/Luchanso/lowcost-sapsan/" target="_blank" />
+          <GithubLink
+            href="https://github.com/Luchanso/lowcost-sapsan/"
+            target="_blank"
+          />
         </FixedIcons>
         <div style={{ margin: spacing.unit * 2, backgroundImage: background }}>
           <Typography variant="headline" gutterBottom>
