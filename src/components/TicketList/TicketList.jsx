@@ -1,17 +1,24 @@
 import React, { Component } from "react";
-import List from "material-ui/List";
 import { List as VirtualList, WindowScroller } from "react-virtualized";
 import Ticket from "../Ticket";
+import { withStyles, Paper } from "material-ui";
 
 const TICKET_HEIGHT = 68;
+
+const styles = ({ spacing }) => ({
+  root: {
+    padding: `${spacing.unit}px 0 ${spacing.unit}px ${spacing.unit}px`
+  }
+});
 
 class TicketList extends Component {
   render() {
     const { items } = this.props;
 
     return (
-      <List>
-        <WindowScroller>
+      <div>
+        { this.renderList() }
+        {/* <WindowScroller>
           {({ height, isScrolling, onChildScroll, scrollTop }) => (
             <VirtualList
               style={{ outline: 'none' }}
@@ -26,9 +33,21 @@ class TicketList extends Component {
               width={300}
             />
           )}
-        </WindowScroller>
-      </List>
+        </WindowScroller> */}
+      </div>
     );
+  }
+
+  renderList() {
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <Paper>
+          Номер поезда
+        </Paper>
+      </div>
+    )
   }
 
   renderRow = ({ index, isScrolling, isVisible, key, parent, style }) => {
@@ -41,4 +60,6 @@ class TicketList extends Component {
     );
   }
 }
-export default TicketList;
+
+
+export default withStyles(styles)(TicketList);

@@ -18,7 +18,8 @@
     "react-virtualized": "^9.18.5",
     "request": "^2.85.0",
     "request-promise": "^4.2.2",
-    "sleep-promise": "^6.0.0"
+    "sleep-promise": "^6.0.0",
+    "styled-components": "^3.2.6"
   },
   "scripts": {
     "predeploy": "yarn build",
